@@ -50,71 +50,57 @@ public class RouteNetwork implements RouteNetworkInterface {
     }
     
     @Override
-    public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, String endCode, int maxStops) {
-        if (!airports.containsKey(startCode) || !airports.containsKey(endCode)) {
-            return new DynamicList<>(); // Return empty if airports don't exist
+public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, String endCode, int maxStops) {
+    if (!airports.containsKey(startCode) || !airports.containsKey(endCode)) {
+        return new DynamicList<>();
+    }
+    if (maxStops < 0) {
+        throw new IllegalArgumentException("maxStops cannot be negative");
+    }
+    
+    int maxFlights = maxStops + 1;
+    DynamicList<DynamicList<Flight>> allRoutes = new DynamicList<>();
+    
+    // Use efficient circular queue instead of DynamicList
+    SimpleQueue<SearchNode> queue = new SimpleQueue<>(1000);
+    queue.enqueue(new SearchNode(startCode, new DynamicList<>(), 0));
+    
+    while (!queue.isEmpty()) {
+        SearchNode current = queue.dequeue(); // NOW O(1) instead of O(n)!
+        
+        String currentAirport = current.airportCode;
+        DynamicList<Flight> currentPath = current.path;
+        int flightCount = current.flightCount;
+        
+        if (currentAirport.equals(endCode)) {
+            allRoutes.add(currentPath);
+            continue;
         }
-        if (maxStops < 0) {
-            throw new IllegalArgumentException("maxStops cannot be negative");
+        
+        if (flightCount >= maxFlights) {
+            continue;
         }
         
-        // Use BFS to find all paths with at most maxStops intermediate airports
-        // maxStops = 0 → direct only (1 flight)
-        // maxStops = 1 → up to 1 stop (up to 2 flights)
-        int maxFlights = maxStops + 1;
-        
-        DynamicList<DynamicList<Flight>> allRoutes = new DynamicList<>();
-        
-        // BFS with path tracking
-        // Each queue item stores: [current airport code, path of flights taken, number of flights]
-        DynamicList<SearchNode> queue = new DynamicList<>();
-        queue.add(new SearchNode(startCode, new DynamicList<>(), 0));
-        
-        while (!queue.isEmpty()) {
-            // Dequeue (remove first element - manual since no Queue ADT exposed)
-            SearchNode current = queue.get(0);
-            queue.remove(0);
+        DynamicList<Flight> outgoingFlights = graph.getOutgoingFlights(currentAirport);
+        for (int i = 0; i < outgoingFlights.size(); i++) {
+            Flight flight = outgoingFlights.get(i);
+            String nextAirport = flight.getDestination().getCode();
             
-            String currentAirport = current.airportCode;
-            DynamicList<Flight> currentPath = current.path;
-            int flightCount = current.flightCount;
-            
-            // If we reached destination, save this route
-            if (currentAirport.equals(endCode)) {
-                allRoutes.add(currentPath);
-                continue; // Don't expand further from destination
-            }
-            
-            // If we've used all allowed flights, don't expand further
-            if (flightCount >= maxFlights) {
+            if (isAirportInPath(nextAirport, currentPath)) {
                 continue;
             }
             
-            // Expand to all outgoing flights
-            DynamicList<Flight> outgoingFlights = graph.getOutgoingFlights(currentAirport);
-            for (int i = 0; i < outgoingFlights.size(); i++) {
-                Flight flight = outgoingFlights.get(i);
-                String nextAirport = flight.getDestination().getCode();
-                
-                // Avoid cycles: don't revisit airports already in path
-                if (isAirportInPath(nextAirport, currentPath)) {
-                    continue;
-                }
-                
-                // Create new path with this flight added
-                DynamicList<Flight> newPath = copyPath(currentPath);
-                newPath.add(flight);
-                
-                // Enqueue
-                queue.add(new SearchNode(nextAirport, newPath, flightCount + 1));
-            }
+            DynamicList<Flight> newPath = copyPath(currentPath);
+            newPath.add(flight);
+            
+            queue.enqueue(new SearchNode(nextAirport, newPath, flightCount + 1));
         }
-        
-        // Sort routes by number of flights (fewest first)
-        sortRoutesByLength(allRoutes);
-        
-        return allRoutes;
     }
+    
+    sortRoutesByLength(allRoutes);
+    return allRoutes;
+}
+
     
     @Override
     public Flight getDirectFlight(String originCode, String destCode) {

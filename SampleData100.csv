@@ -1,0 +1,101 @@
+airline_iata,airline_name,source_iata,source_city,destination_iata,destination_city,route,stops,aircraft_type,aircraft_capacity,price_usd
+AZ,ITA Airways,LIN,Milan,GVA,Geneva,LIN-GVA,0,A320,180,79.16
+AV,Avianca,EWR,Newark,BOG,Bogota,EWR-BOG,1,B757-200,200,287.3
+FR,Ryanair,STN,London,LGW,London,STN-LGW,0,A320,180,173.73
+NH,ANA,NRT,Tokyo,KUL,Kuala Lumpur,NRT-KUL,0,A320,180,154.65
+TK,Turkish Airlines,MXP,Milan,IST,Istanbul,MXP-IST,1,A319,138,223.9
+NH,ANA,DXB,Dubai,LHR,London,DXB-LHR,0,B767-300ER,261,445.44
+CX,Cathay Pacific,MEX,Mexico City,YUL,Montreal,MEX-YUL,1,A319,138,270.45
+LH,Lufthansa,SIN,Singapore,ATL,Atlanta,SIN-ATL,1,B777-300ER,360,813.17
+AI,Air India,HND,Tokyo,LAX,Los Angeles,HND-LAX,0,B787-10,330,982.03
+FR,Ryanair,CAI,Cairo,BGY,Milan,CAI-BGY,1,A330-300,277,516.09
+AZ,ITA Airways,FCO,Rome,SLC,Salt Lake City,FCO-SLC,0,B787-10,330,1651.27
+AV,Avianca,BOG,Bogota,IAH,Houston,BOG-IAH,0,A330-200,246,752.17
+CX,Cathay Pacific,HKG,Hong Kong,TPE,Taipei,HKG-TPE,0,B737 MAX 8,178,273.75
+TK,Turkish Airlines,IST,Istanbul,CAI,Cairo,IST-CAI,0,A321LR,206,712.91
+AV,Avianca,BOG,Bogota,BOM,Mumbai,BOG-BOM,0,B787-10,330,1631.87
+AA,American Airlines,JFK,New York,JNB,Johannesburg,JFK-JNB,0,A380-800,489,970.77
+LA,LATAM Airlines,LIM,Lima,DEL,Delhi,LIM-DEL,0,B777-200ER,317,738.93
+FR,Ryanair,DUB,Dublin,AKL,Auckland,DUB-AKL,0,B777-300ER,360,1211.87
+NH,ANA,LAX,Los Angeles,MEL,Melbourne,LAX-MEL,0,B787-10,330,1372.77
+AI,Air India,GRU,Sao Paulo,DUB,Dublin,GRU-DUB,1,A350-1000,366,756.99
+EK,Emirates,LHR,London,LAX,Los Angeles,LHR-LAX,0,A350-1000,366,1728.13
+AV,Avianca,FRA,Frankfurt,ORD,Chicago,FRA-ORD,0,B787-9,290,730.07
+LA,LATAM Airlines,AUH,Abu Dhabi,GRU,Sao Paulo,AUH-GRU,1,B777-200ER,317,970.31
+LH,Lufthansa,LAX,Los Angeles,HKG,Hong Kong,LAX-HKG,0,B777-200ER,317,949.91
+LA,LATAM Airlines,LIM,Lima,JNB,Johannesburg,LIM-JNB,0,B747-8,410,682.1
+AA,American Airlines,CLT,Charlotte,JFK,New York,CLT-JFK,0,B737-800,189,280.08
+NH,ANA,HND,Tokyo,VIE,Vienna,HND-VIE,0,A380-800,489,1273.71
+AI,Air India,DEL,Delhi,MIA,Miami,DEL-MIA,0,A350-900,315,1058.79
+JL,Japan Airlines,SFO,San Francisco,ICN,Seoul,SFO-ICN,0,B787-9,290,1677.4
+SQ,Singapore Airlines,JFK,New York,FRA,Frankfurt,JFK-FRA,0,A350-900,315,1770.37
+SV,Saudia,JFK,New York,LHR,London,JFK-LHR,0,B787-10,330,1040.0
+AZ,ITA Airways,YUL,Montreal,CDG,Paris,YUL-CDG,0,B747-8,410,1306.51
+IB,Iberia,MEL,Melbourne,DXB,Dubai,MEL-DXB,0,B787-9,290,1284.19
+LX,SWISS,JFK,New York,LHR,London,JFK-LHR,0,B777-300ER,360,1662.1
+TK,Turkish Airlines,IST,Istanbul,ICN,Seoul,IST-ICN,0,B777-300ER,360,1099.09
+LA,LATAM Airlines,LIM,Lima,SCL,Santiago,LIM-SCL,1,B737-800,189,309.82
+LA,LATAM Airlines,GRU,Sao Paulo,ATL,Atlanta,GRU-ATL,1,A321XLR,200,714.4
+TK,Turkish Airlines,JNB,Johannesburg,ICN,Seoul,JNB-ICN,1,A350-1000,366,736.32
+AA,American Airlines,ORY,Paris,LAX,Los Angeles,ORY-LAX,1,B787-9,290,1107.91
+NZ,Air New Zealand,DXB,Dubai,AKL,Auckland,DXB-AKL,1,B777-200ER,317,1596.61
+IB,Iberia,MAD,Madrid,BKK,Bangkok,MAD-BKK,1,B787-9,290,733.76
+AC,Air Canada,DOH,Doha,JFK,New York,DOH-JFK,0,B747-8,410,1796.31
+AI,Air India,FRA,Frankfurt,SFO,San Francisco,FRA-SFO,0,A350-900,315,719.63
+QF,Qantas,MEL,Melbourne,DXB,Dubai,MEL-DXB,0,A350-900,315,1082.67
+CX,Cathay Pacific,FRA,Frankfurt,ORD,Chicago,FRA-ORD,0,A380-800,489,2134.68
+LA,LATAM Airlines,FRA,Frankfurt,JFK,New York,FRA-JFK,0,A350-1000,366,1365.86
+AI,Air India,LHR,London,LAX,Los Angeles,LHR-LAX,0,B777-200ER,317,1084.26
+AF,Air France,LAX,Los Angeles,HKG,Hong Kong,LAX-HKG,0,B787-10,330,886.01
+NH,ANA,NRT,Tokyo,KUL,Kuala Lumpur,NRT-KUL,1,A319,138,218.69
+EY,Etihad Airways,AUH,Abu Dhabi,YYZ,Toronto,AUH-YYZ,0,B787-10,330,1429.1
+AF,Air France,CDG,Paris,MXP,Milan,CDG-MXP,1,A320,180,305.81
+IB,Iberia,MAD,Madrid,SCL,Santiago,MAD-SCL,1,A350-1000,366,846.98
+AZ,ITA Airways,HND,Tokyo,LAX,Los Angeles,HND-LAX,0,B747-8,410,850.45
+LA,LATAM Airlines,SFO,San Francisco,ICN,Seoul,SFO-ICN,0,A380-800,489,725.14
+BR,EVA Air,TPE,Taipei,DTW,Detroit,TPE-DTW,0,A380-800,489,1066.13
+QR,Qatar Airways,DOH,Doha,AUH,Abu Dhabi,DOH-AUH,0,A319,138,327.39
+U2,easyJet,JFK,New York,FRA,Frankfurt,JFK-FRA,0,B787-10,330,606.25
+AF,Air France,ORD,Chicago,LHR,London,ORD-LHR,0,B787-10,330,913.83
+U2,easyJet,LTN,London,FRA,Frankfurt,LTN-FRA,1,A220-300,145,87.51
+LH,Lufthansa,FRA,Frankfurt,LAX,Los Angeles,FRA-LAX,0,B787-10,330,1356.35
+FR,Ryanair,DXB,Dubai,MEL,Melbourne,DXB-MEL,0,B787-10,330,591.91
+JL,Japan Airlines,YUL,Montreal,CDG,Paris,YUL-CDG,0,B787-9,290,2140.35
+UA,United Airlines,ORD,Chicago,DTW,Detroit,ORD-DTW,0,A321,220,125.76
+NH,ANA,NRT,Tokyo,MXP,Milan,NRT-MXP,1,A350-1000,366,1616.11
+EY,Etihad Airways,HKG,Hong Kong,BCN,Barcelona,HKG-BCN,1,B787-9,290,1820.54
+SQ,Singapore Airlines,DXB,Dubai,LHR,London,DXB-LHR,0,B787-8,242,527.39
+KE,Korean Air,LHR,London,SIN,Singapore,LHR-SIN,0,B747-8,410,781.23
+TK,Turkish Airlines,LAX,Los Angeles,FRA,Frankfurt,LAX-FRA,0,B787-9,290,1293.59
+IB,Iberia,MEL,Melbourne,DXB,Dubai,MEL-DXB,0,B777-200ER,317,673.91
+AI,Air India,DFW,Dallas,BOM,Mumbai,DFW-BOM,1,A350-900,315,628.79
+LA,LATAM Airlines,ADD,Addis Ababa,KUL,Kuala Lumpur,ADD-KUL,1,B787-10,330,1106.15
+UA,United Airlines,SFO,San Francisco,HKG,Hong Kong,SFO-HKG,0,B787-10,330,1773.73
+NZ,Air New Zealand,SFO,San Francisco,ICN,Seoul,SFO-ICN,0,B787-9,290,1399.46
+NZ,Air New Zealand,AKL,Auckland,KUL,Kuala Lumpur,AKL-KUL,0,B777-200ER,317,1708.19
+EY,Etihad Airways,AUH,Abu Dhabi,JFK,New York,AUH-JFK,0,B777-200ER,317,944.96
+AV,Avianca,LAX,Los Angeles,HKG,Hong Kong,LAX-HKG,0,B777-300ER,360,1167.09
+LH,Lufthansa,YYZ,Toronto,LHR,London,YYZ-LHR,0,B787-10,330,696.94
+SQ,Singapore Airlines,ORD,Chicago,FRA,Frankfurt,ORD-FRA,0,B787-10,330,749.09
+NZ,Air New Zealand,ORD,Chicago,LHR,London,ORD-LHR,0,B777-300ER,360,778.39
+SQ,Singapore Airlines,SIN,Singapore,LGW,London,SIN-LGW,1,B787-10,330,1591.13
+AC,Air Canada,YVR,Vancouver,AKL,Auckland,YVR-AKL,0,B777-300ER,360,1520.16
+EY,Etihad Airways,ORD,Chicago,LHR,London,ORD-LHR,0,B787-9,290,1546.87
+AI,Air India,BOM,Mumbai,LHR,London,BOM-LHR,0,B787-10,330,1524.81
+DL,Delta Air Lines,CDG,Paris,JFK,New York,CDG-JFK,0,B787-10,330,1808.74
+SV,Saudia,LHR,London,DXB,Dubai,LHR-DXB,0,B737 MAX 9,193,419.09
+AF,Air France,ORY,Paris,IAH,Houston,ORY-IAH,0,B777-200ER,317,947.91
+IB,Iberia,MAD,Madrid,DEL,Delhi,MAD-DEL,0,B777-300ER,360,1129.45
+UA,United Airlines,RUH,Riyadh,NBO,Nairobi,RUH-NBO,1,B787-9,290,615.22
+BA,British Airways,TPE,Taipei,ORY,Paris,TPE-ORY,1,B787-9,290,1062.59
+TK,Turkish Airlines,LAX,Los Angeles,ICN,Seoul,LAX-ICN,0,A350-900,315,1490.88
+EK,Emirates,SFO,San Francisco,FRA,Frankfurt,SFO-FRA,0,A380-800,489,1318.37
+UA,United Airlines,BOM,Mumbai,DEN,Denver,BOM-DEN,1,A350-900,315,1225.72
+AC,Air Canada,YUL,Montreal,GVA,Geneva,YUL-GVA,0,A350-900,315,1034.73
+AV,Avianca,BOG,Bogota,SLC,Salt Lake City,BOG-SLC,0,A330-300,277,825.27
+AZ,ITA Airways,LIN,Milan,FRA,Frankfurt,LIN-FRA,0,A319,138,290.09
+SQ,Singapore Airlines,JFK,New York,LHR,London,JFK-LHR,0,A350-1000,366,1574.63
+U2,easyJet,JFK,New York,DOH,Doha,JFK-DOH,0,A380-800,489,1600.86
+NZ,Air New Zealand,AKL,Auckland,HKG,Hong Kong,AKL-HKG,0,A350-1000,366,1916.73
+QR,Qatar Airways,SIN,Singapore,SYD,Sydney,SIN-SYD,0,A350-900,315,1681.09
+UA,United Airlines,ORD,Chicago,MUC,Munich,ORD-MUC,0,B777-200ER,317,1524.36
