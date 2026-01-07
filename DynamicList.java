@@ -1,6 +1,6 @@
 /**
- * Generic dynamic array (resizable list).
- * Automatically grows when capacity is reached.
+ * A resizable array that grows automatically when it gets full.
+ * Basically our own version of ArrayList.
  * 
  * Source: AI-generated based on standard ArrayList implementation pattern
  */
@@ -23,8 +23,8 @@ public class DynamicList<T> {
     }
     
     /**
-     * Add element to the end of the list.
-     * Time: O(1) amortized (O(n) when resizing)
+     * Add an element to the end.
+     * Time: O(1) amortized (O(n) when we need to resize)
      */
     public void add(T element) {
         if (size == capacity) {
@@ -34,7 +34,7 @@ public class DynamicList<T> {
     }
     
     /**
-     * Get element at index.
+     * Get element at a position.
      * Time: O(1)
      */
     @SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class DynamicList<T> {
     }
     
     /**
-     * Set element at index.
+     * Change the element at a specific position.
      * Time: O(1)
      */
     public void set(int index, T element) {
@@ -57,8 +57,8 @@ public class DynamicList<T> {
     }
     
     /**
-     * Remove element at index.
-     * Time: O(n) - needs to shift elements
+     * Remove element at position and shift everything over.
+     * Time: O(n) - because we have to move all the elements after it
      */
     public T remove(int index) {
         if (index < 0 || index >= size) {
@@ -68,16 +68,16 @@ public class DynamicList<T> {
         @SuppressWarnings("unchecked")
         T removed = (T) array[index];
         
-        // Shift elements left
+        // Shift everything left
         for (int i = index; i < size - 1; i++) {
             array[i] = array[i + 1];
         }
-        array[--size] = null; // Help GC
+        array[--size] = null; // Let garbage collector clean it up
         return removed;
     }
     
     /**
-     * Remove first occurrence of element.
+     * Remove the first occurrence of an element if it exists.
      * Time: O(n)
      */
     public boolean remove(T element) {
@@ -91,7 +91,7 @@ public class DynamicList<T> {
     }
     
     /**
-     * Check if list contains element.
+     * Check if the list contains a specific element.
      * Time: O(n)
      */
     public boolean contains(T element) {
@@ -119,8 +119,8 @@ public class DynamicList<T> {
     }
     
     /**
-     * Double the capacity when full.
-     * Time: O(n) - copies all elements
+     * Double the capacity and copy all elements over.
+     * Time: O(n) - have to copy everything
      */
     private void resize() {
         capacity *= 2;

@@ -1,6 +1,6 @@
 /**
- * Graph representation using adjacency list.
- * Vertices are airports, edges are flights.
+ * Adjacency list graph where airports are vertices and flights are edges.
+ * Each airport maps to a list of outgoing flights.
  * 
  * Source: AI-generated based on standard adjacency list graph implementation
  */
@@ -12,7 +12,7 @@ public class FlightGraph {
     }
     
     /**
-     * Add an airport (vertex) to the graph.
+     * Add an airport to the graph. Does nothing if it already exists.
      * Time: O(1)
      */
     public void addAirport(String airportCode) {
@@ -22,7 +22,7 @@ public class FlightGraph {
     }
     
     /**
-     * Add a flight (directed edge) from origin to destination.
+     * Add a flight from one airport to another. Automatically adds airports if needed.
      * Time: O(1)
      */
     public void addFlight(String originCode, String destCode, Flight flight) {
@@ -36,7 +36,7 @@ public class FlightGraph {
     }
     
     /**
-     * Get all outgoing flights from an airport.
+     * Get all flights leaving from a given airport.
      * Time: O(1)
      */
     public DynamicList<Flight> getOutgoingFlights(String airportCode) {
@@ -45,7 +45,7 @@ public class FlightGraph {
     }
     
     /**
-     * Check if airport exists in graph.
+     * Check if an airport is already in the graph.
      * Time: O(1)
      */
     public boolean hasAirport(String airportCode) {
@@ -53,8 +53,8 @@ public class FlightGraph {
     }
     
     /**
-     * Get direct flight between two airports (if exists).
-     * Time: O(d) where d = outdegree of origin
+     * Find a direct flight between two airports if one exists.
+     * Time: O(d) where d = number of outgoing flights from origin
      */
     public Flight getDirectFlight(String originCode, String destCode) {
         DynamicList<Flight> outgoing = getOutgoingFlights(originCode);
@@ -68,7 +68,7 @@ public class FlightGraph {
     }
     
     /**
-     * Get all flights in the entire graph.
+     * Return every single flight in the graph as one big list.
      * Time: O(V + E) where V = airports, E = flights
      */
     public DynamicList<Flight> getAllFlights() {

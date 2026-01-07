@@ -1,23 +1,23 @@
 /**
- * Represents a booking/reservation made by a passenger.
- * Stores passenger information and the flight(s) booked.
+ * Represents a passenger's booking with all the booking details.
+ * Stores which flight they booked, how many seats, and what they paid.
  * 
  * Source: Custom implementation based on M2 design requirements
  */
 public class Reservation {
-    private String reservationId;       // Unique reservation identifier
-    private Flight flight;              // The flight booked (for direct flights)
-    private String passengerName;       // Name of the passenger
-    private int numberOfSeats;          // Number of seats booked
-    private double totalCost;           // Total cost at time of booking
+    private String reservationId;       // Unique ID like "RES0001"
+    private Flight flight;              // The flight that was booked
+    private String passengerName;       // Who booked it
+    private int numberOfSeats;          // How many seats they got
+    private double totalCost;           // What they paid (locked in at booking)
     
     /**
-     * Constructor for single-flight reservation
-     * @param reservationId Unique ID for this reservation
+     * Create a new reservation.
+     * @param reservationId Unique reservation ID
      * @param flight The flight being booked
-     * @param passengerName Name of passenger
-     * @param numberOfSeats Number of seats to book
-     * @param totalCost Total price paid (locked at booking time)
+     * @param passengerName Name of the passenger
+     * @param numberOfSeats Number of seats booked
+     * @param totalCost Total price at booking time
      */
     public Reservation(String reservationId, Flight flight, String passengerName, 
                       int numberOfSeats, double totalCost) {
@@ -50,7 +50,7 @@ public class Reservation {
     }
     
     /**
-     * String representation for debugging/testing.
+     * Returns details like "Reservation RES0001: Alice booked 2 seat(s) on A3501 for €179.98".
      */
     @Override
     public String toString() {

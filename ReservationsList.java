@@ -1,6 +1,6 @@
 /**
- * Implementation of ReservationsList ADT.
- * Manages reservations with automatic dynamic pricing based on load factor.
+ * Handles all reservation bookings and manages dynamic pricing for flights.
+ * Automatically adjusts flight prices based on how full they are.
  * 
  * Dynamic Pricing Formula:
  * - Load Factor >= 0.8 (80%): currentPrice = basePrice × 1.5
@@ -24,7 +24,7 @@ public class ReservationsList implements ReservationsListInterface {
     @Override
     public Reservation addReservation(String originCode, String destCode, 
                                       String passengerName, int seats) {
-        // Validate inputs
+        // Check inputs make sense
         if (passengerName == null || passengerName.isEmpty()) {
             throw new IllegalArgumentException("Passenger name cannot be null or empty");
         }
@@ -35,7 +35,7 @@ public class ReservationsList implements ReservationsListInterface {
             throw new IllegalArgumentException("One or both airports do not exist");
         }
         
-        // Find cheapest route with available seats (up to 1 stop)
+        // Find the cheapest available route (tries up to 1 stop)
         DynamicList<Flight> bestRoute = findCheapestAvailableRoute(originCode, destCode, seats);
         
         if (bestRoute == null || bestRoute.isEmpty()) {
@@ -43,29 +43,28 @@ public class ReservationsList implements ReservationsListInterface {
                                              + originCode + " to " + destCode);
         }
         
-        // Calculate total cost at current prices
+        // Calculate total cost with current prices
         double totalCost = 0.0;
         for (int i = 0; i < bestRoute.size(); i++) {
             Flight flight = bestRoute.get(i);
             totalCost += flight.getCurrentPrice() * seats;
         }
         
-        // Update booked seats for each flight in route
+        // Update the booked seats for each flight
         for (int i = 0; i < bestRoute.size(); i++) {
             Flight flight = bestRoute.get(i);
             flight.setBookedSeats(flight.getBookedSeats() + seats);
         }
         
-        // Trigger dynamic pricing update for affected flights
+        // Update dynamic pricing since occupancy changed
         for (int i = 0; i < bestRoute.size(); i++) {
             updateDynamicPrice(bestRoute.get(i));
         }
         
-        // Create reservation (simplified: store only first flight for single/multi-leg)
+        // Create the reservation with a unique ID
         String reservationId = "RES" + String.format("%04d", nextReservationId++);
         
-        // For simplicity: create one reservation per flight segment
-        // In real system, might have one reservation object with list of flights
+        // Store it (simplification: we save just the first flight)
         Reservation reservation = new Reservation(reservationId, bestRoute.get(0), 
                                                    passengerName, seats, totalCost);
         reservations.add(reservation);
@@ -85,7 +84,7 @@ public class ReservationsList implements ReservationsListInterface {
     
     @Override
     public boolean cancelReservation(String reservationId) {
-        // Find reservation
+        // Find the reservation to cancel
         Reservation toCancel = null;
         int index = -1;
         
@@ -98,18 +97,18 @@ public class ReservationsList implements ReservationsListInterface {
         }
         
         if (toCancel == null) {
-            return false; // Reservation not found
+            return false; // Couldn't find it
         }
         
-        // Free up seats on the flight
+        // Give the seats back to the flight
         Flight flight = toCancel.getFlight();
         int seatsToFree = toCancel.getNumberOfSeats();
         flight.setBookedSeats(flight.getBookedSeats() - seatsToFree);
         
-        // Update price (should decrease as occupancy drops)
+        // Adjust price since occupancy went down
         updateDynamicPrice(flight);
         
-        // Remove reservation
+        // Remove the reservation from our list
         reservations.remove(index);
         
         return true;
@@ -118,7 +117,7 @@ public class ReservationsList implements ReservationsListInterface {
     @Override
     public DynamicList<Flight> findCheapestAvailableRoute(String originCode, String destCode, 
                                                            int requiredSeats) {
-        // Get all routes with up to 1 stop
+        // Get all possible routes with max 1 stop
         DynamicList<DynamicList<Flight>> allRoutes = 
             routeNetwork.findRoutesWithStops(originCode, destCode, 1);
         
@@ -126,7 +125,7 @@ public class ReservationsList implements ReservationsListInterface {
             return null;
         }
         
-        // Filter routes that have sufficient capacity
+        // Keep only the routes that have enough seats
         DynamicList<DynamicList<Flight>> validRoutes = new DynamicList<>();
         for (int i = 0; i < allRoutes.size(); i++) {
             DynamicList<Flight> route = allRoutes.get(i);
@@ -139,7 +138,7 @@ public class ReservationsList implements ReservationsListInterface {
             return null;
         }
         
-        // Find cheapest valid route
+        // Pick the cheapest one
         DynamicList<Flight> cheapestRoute = validRoutes.get(0);
         double cheapestCost = calculateRouteCost(cheapestRoute, requiredSeats);
         
@@ -174,13 +173,12 @@ public class ReservationsList implements ReservationsListInterface {
     // ========== PRIVATE HELPER METHODS ==========
     
     /**
-     * Update flight price based on load factor (DYNAMIC PRICING LOGIC).
-     * This is a private method - not exposed in the ADT interface.
+     * Adjust flight price based on how full it is (DYNAMIC PRICING).
      * 
      * Pricing Formula:
-     * - Load >= 80%: Price = Base × 1.5
-     * - Load >= 50%: Price = Base × 1.2
-     * - Load < 50%:  Price = Base × 1.0
+     * - Load >= 80%: Price = Base × 1.5 (high demand)
+     * - Load >= 50%: Price = Base × 1.2 (moderate demand)
+     * - Load < 50%:  Price = Base × 1.0 (low demand)
      * 
      * Time: O(1)
      */
@@ -201,7 +199,7 @@ public class ReservationsList implements ReservationsListInterface {
     }
     
     /**
-     * Check if a route has sufficient capacity on all flights.
+     * Check if all flights in a route have enough available seats.
      * Time: O(F) where F = flights in route
      */
     private boolean routeHasCapacity(DynamicList<Flight> route, int requiredSeats) {
@@ -215,7 +213,7 @@ public class ReservationsList implements ReservationsListInterface {
     }
     
     /**
-     * Calculate total cost of a route for given number of seats.
+     * Calculate the total cost for booking a route with a specific number of seats.
      * Time: O(F) where F = flights in route
      */
     private double calculateRouteCost(DynamicList<Flight> route, int seats) {

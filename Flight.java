@@ -1,25 +1,25 @@
 /**
- * Represents a flight between two airports.
- * Contains capacity, pricing (base + dynamic), and booking information.
+ * Represents a single flight with departure, arrival, capacity, and pricing info.
+ * Keeps track of booked seats and supports dynamic pricing.
  * 
  * Source: Custom implementation based on M2 design requirements
  */
 public class Flight {
-    private String flightCode;          // Unique flight identifier (e.g., "A3501")
-    private Airport origin;             // Departure airport
-    private Airport destination;        // Arrival airport
-    private int totalCapacity;          // Total seats on aircraft
-    private int bookedSeats;            // Number of seats already booked
-    private double basePrice;           // Fixed base price (never changes)
-    private double currentPrice;        // Dynamic price (updated based on load factor)
+    private String flightCode;          // Unique flight ID like "A3501"
+    private Airport origin;             // Where it departs from
+    private Airport destination;        // Where it arrives
+    private int totalCapacity;          // Total seats available
+    private int bookedSeats;            // How many seats are already booked
+    private double basePrice;           // Original price (never changes)
+    private double currentPrice;        // Price that may go up/down based on demand
     
     /**
-     * Constructor
-     * @param flightCode Unique identifier for this flight
+     * Create a new flight with origin, destination, capacity, and base price.
+     * @param flightCode Unique identifier
      * @param origin Departure airport
      * @param destination Arrival airport
      * @param totalCapacity Total number of seats
-     * @param basePrice Base price before dynamic adjustments
+     * @param basePrice Original price (before any adjustments)
      */
     public Flight(String flightCode, Airport origin, Airport destination, 
                   int totalCapacity, double basePrice) {
@@ -27,9 +27,9 @@ public class Flight {
         this.origin = origin;
         this.destination = destination;
         this.totalCapacity = totalCapacity;
-        this.bookedSeats = 0;                    // Initially no bookings
+        this.bookedSeats = 0;                    // Starts empty
         this.basePrice = basePrice;
-        this.currentPrice = basePrice;           // Initially same as base price
+        this.currentPrice = basePrice;           // Price starts at base
     }
     
     // Getters
@@ -71,16 +71,17 @@ public class Flight {
     }
     
     /**
-     * Calculate available seats on this flight.
-     * @return Number of seats not yet booked
+     * Calculate how many empty seats are left.
+     * @return Number of unbooked seats
      */
     public int getAvailableSeats() {
         return totalCapacity - bookedSeats;
     }
     
     /**
-     * Calculate load factor (occupancy ratio) for dynamic pricing.
-     * @return Ratio of booked seats to total capacity (0.0 to 1.0)
+     * Calculate what percentage of seats are booked (0.0 to 1.0).
+     * Used to determine dynamic pricing.
+     * @return The load factor as a decimal
      */
     public double getLoadFactor() {
         if (totalCapacity == 0) return 0.0;
@@ -88,16 +89,16 @@ public class Flight {
     }
     
     /**
-     * Check if this flight has enough available seats.
+     * Check if this flight has enough seats available for a booking.
      * @param requiredSeats Number of seats needed
-     * @return true if enough seats available, false otherwise
+     * @return true if we have enough, false otherwise
      */
     public boolean hasAvailableSeats(int requiredSeats) {
         return getAvailableSeats() >= requiredSeats;
     }
     
     /**
-     * String representation for debugging/testing.
+     * Returns a readable string like "A3501: ATH → JFK [45/150 seats, €89.99]".
      */
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 /**
- * Min-heap implementation for priority queue of flights.
- * Flights are ordered by current price (cheapest at root).
+ * A min-heap priority queue that orders flights by price (cheapest on top).
+ * Uses an array representation of a binary heap.
  * 
  * Source: AI-generated based on standard binary min-heap with array representation
  */
@@ -12,7 +12,7 @@ public class MinHeap {
     }
     
     /**
-     * Insert a flight into the heap.
+     * Add a flight to the heap and move it up if needed.
      * Time: O(log n)
      */
     public void insert(Flight flight) {
@@ -21,7 +21,7 @@ public class MinHeap {
     }
     
     /**
-     * Get the cheapest flight (min element) without removing.
+     * Look at the cheapest flight without removing it.
      * Time: O(1)
      */
     public Flight peek() {
@@ -32,7 +32,7 @@ public class MinHeap {
     }
     
     /**
-     * Remove and return the cheapest flight.
+     * Take out the cheapest flight (and reorganize the heap).
      * Time: O(log n)
      */
     public Flight extractMin() {
@@ -53,8 +53,8 @@ public class MinHeap {
     }
     
     /**
-     * Build heap from list of flights.
-     * Time: O(n log n) - could be optimized to O(n) with bottom-up heapify
+     * Turn a list of flights into a heap (could be optimized but this works).
+     * Time: O(n log n)
      */
     public void buildHeap(DynamicList<Flight> flights) {
         heap.clear();
@@ -72,7 +72,7 @@ public class MinHeap {
     }
     
     /**
-     * Restore heap property upward from index.
+     * Move an element up the heap if it's smaller than its parent.
      * Time: O(log n)
      */
     private void heapifyUp(int index) {
@@ -89,7 +89,7 @@ public class MinHeap {
     }
     
     /**
-     * Restore heap property downward from index.
+     * Move an element down the heap, swapping with smaller children as needed.
      * Time: O(log n)
      */
     private void heapifyDown(int index) {

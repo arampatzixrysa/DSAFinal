@@ -1,6 +1,6 @@
 /**
- * Simple queue implementation using circular array.
- * Provides O(1) enqueue and dequeue operations.
+ * A queue using a circular array - first in, first out.
+ * Both enqueue and dequeue are O(1) operations.
  * 
  * Source: AI-generated standard circular queue implementation
  */
@@ -24,7 +24,7 @@ public class SimpleQueue<T> {
     }
     
     /**
-     * Add element to the rear of the queue.
+     * Add element to the back of the queue.
      * Time: O(1)
      */
     public void enqueue(T element) {
@@ -37,7 +37,7 @@ public class SimpleQueue<T> {
     }
     
     /**
-     * Remove and return element from the front of the queue.
+     * Remove and return the element from the front of the queue.
      * Time: O(1)
      */
     @SuppressWarnings("unchecked")
@@ -46,14 +46,14 @@ public class SimpleQueue<T> {
             throw new IllegalStateException("Queue is empty");
         }
         T element = (T) array[front];
-        array[front] = null; // Help GC
+        array[front] = null; // Let garbage collector clean it up
         front = (front + 1) % capacity;
         size--;
         return element;
     }
     
     /**
-     * Get front element without removing.
+     * Look at what's at the front without removing it.
      * Time: O(1)
      */
     @SuppressWarnings("unchecked")
@@ -73,7 +73,7 @@ public class SimpleQueue<T> {
     }
     
     /**
-     * Double capacity when full.
+     * Double the capacity and copy everything over, preserving order.
      * Time: O(n)
      */
     private void resize() {

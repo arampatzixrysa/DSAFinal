@@ -1,6 +1,6 @@
 /**
- * Simple hash map using separate chaining for collision resolution.
- * Used for fast airport lookup by IATA code.
+ * A hash map using separate chaining for collisions.
+ * Used for quick lookups (especially airports by code).
  * 
  * Source: AI-generated based on standard HashMap implementation with chaining
  */
@@ -23,8 +23,8 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Put key-value pair into map.
-     * Time: O(1) average, O(n) worst case (many collisions in one bucket)
+     * Put a key-value pair in the map. Updates if key already exists.
+     * Time: O(1) average, O(n) worst case (if all hash to same bucket)
      */
     public void put(K key, V value) {
         if (key == null) {
@@ -34,7 +34,7 @@ public class SimpleHashMap<K, V> {
         int bucketIndex = getBucketIndex(key);
         DynamicList<Entry<K, V>> bucket = buckets[bucketIndex];
         
-        // Check if key already exists, update value
+        // Check if key already exists and update it
         for (int i = 0; i < bucket.size(); i++) {
             Entry<K, V> entry = bucket.get(i);
             if (entry.key.equals(key)) {
@@ -43,18 +43,18 @@ public class SimpleHashMap<K, V> {
             }
         }
         
-        // Add new entry
+        // Otherwise add a new entry
         bucket.add(new Entry<>(key, value));
         size++;
         
-        // Rehash if load factor exceeded
+        // Resize if we're getting too full
         if ((double) size / capacity > LOAD_FACTOR_THRESHOLD) {
             rehash();
         }
     }
     
     /**
-     * Get value by key.
+     * Get value associated with a key, or null if not found.
      * Time: O(1) average, O(n) worst case
      */
     public V get(K key) {
@@ -73,7 +73,7 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Check if key exists.
+     * Check if the map contains a given key.
      * Time: O(1) average
      */
     public boolean containsKey(K key) {
@@ -81,7 +81,7 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Remove key-value pair.
+     * Remove a key and return its value, or null if not found.
      * Time: O(1) average
      */
     public V remove(K key) {
@@ -110,7 +110,7 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Get all values in the map.
+     * Get all the values as a list.
      * Time: O(n)
      */
     public DynamicList<V> values() {
@@ -125,14 +125,14 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Calculate bucket index from key's hash code.
+     * Figure out which bucket a key should go in using its hash code.
      */
     private int getBucketIndex(K key) {
         return Math.abs(key.hashCode()) % capacity;
     }
     
     /**
-     * Rehash when load factor exceeded - double capacity.
+     * Double the size and re-add all entries when we get too full.
      * Time: O(n)
      */
     @SuppressWarnings("unchecked")
@@ -147,7 +147,7 @@ public class SimpleHashMap<K, V> {
         }
         size = 0;
         
-        // Re-insert all entries
+        // Re-add everything (indices might change due to new capacity)
         for (int i = 0; i < oldCapacity; i++) {
             DynamicList<Entry<K, V>> bucket = oldBuckets[i];
             for (int j = 0; j < bucket.size(); j++) {
@@ -158,7 +158,7 @@ public class SimpleHashMap<K, V> {
     }
     
     /**
-     * Internal Entry class for key-value pairs.
+     * Helper class for storing key-value pairs inside buckets.
      */
     private static class Entry<K, V> {
         K key;

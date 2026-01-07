@@ -1,19 +1,18 @@
 /**
- * Represents an airport in the flight network.
- * Simple data class with IATA code, name, and city.
+ * A simple airport object that stores basic info: IATA code, name, and city.
  * 
  * Source: Custom implementation based on M2 design requirements
  */
 public class Airport {
-    private String code;        // IATA code (e.g., "ATH", "JFK")
+    private String code;        // IATA code like "ATH" or "LAX"
     private String name;        // Full airport name
-    private String city;        // City location
+    private String city;        // City where it's located
     
     /**
-     * Constructor
-     * @param code IATA airport code (3 letters)
-     * @param name Full name of the airport
-     * @param city City where airport is located
+     * Create a new airport with code, name, and city.
+     * @param code 3-letter IATA code
+     * @param name Airport's full name
+     * @param city City location
      */
     public Airport(String code, String name, String city) {
         this.code = code;
@@ -44,8 +43,7 @@ public class Airport {
     }
     
     /**
-     * Two airports are equal if they have the same IATA code.
-     * This allows airports to be used in HashMaps and Sets correctly.
+     * Two airports are considered the same if they have the same IATA code.
      */
     @Override
     public boolean equals(Object obj) {
@@ -56,7 +54,7 @@ public class Airport {
     }
     
     /**
-     * Hash code based on airport code for HashMap usage.
+     * Hash code based on the IATA code so it works in HashMaps.
      */
     @Override
     public int hashCode() {
@@ -64,7 +62,7 @@ public class Airport {
     }
     
     /**
-     * String representation for debugging/testing.
+     * Returns a readable string representation (e.g., "ATH - Athens International (Athens)").
      */
     @Override
     public String toString() {

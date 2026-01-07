@@ -1,14 +1,14 @@
 /**
- * Implementation of RouteNetwork ADT.
- * Internally uses FlightGraph (adjacency list) and SimpleHashMap for airport storage.
+ * Manages the flight network with airports and flights. Uses a graph internally for route finding.
+ * Also maintains a map for quick airport lookups by code.
  * 
- * Key Algorithm: BFS for finding routes with limited stops.
+ * Key Algorithm: BFS to find routes with a limit on stops.
  * Source: Custom implementation with AI-assisted BFS algorithm
  */
 public class RouteNetwork implements RouteNetworkInterface {
     
-    private FlightGraph graph;                          // Internal graph structure
-    private SimpleHashMap<String, Airport> airports;    // Airport lookup by code
+    private FlightGraph graph;                          // Stores the flight network structure
+    private SimpleHashMap<String, Airport> airports;    // Quick lookup for airports by code
     
     public RouteNetwork() {
         this.graph = new FlightGraph();
@@ -122,10 +122,10 @@ public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, St
         return airports.get(code);
     }
     
-    // ========== HELPER METHODS (PRIVATE) ==========
+    // ========== HELPER METHODS ==========
     
     /**
-     * Check if an airport is already visited in the current path (cycle detection).
+     * Check if an airport code already appears in the current path (prevents loops).
      */
     private boolean isAirportInPath(String airportCode, DynamicList<Flight> path) {
         for (int i = 0; i < path.size(); i++) {
@@ -140,7 +140,7 @@ public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, St
     }
     
     /**
-     * Create a copy of a flight path (needed for BFS branching).
+     * Make a copy of a flight path so we can branch off without affecting the original.
      */
     private DynamicList<Flight> copyPath(DynamicList<Flight> original) {
         DynamicList<Flight> copy = new DynamicList<>();
@@ -151,11 +151,10 @@ public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, St
     }
     
     /**
-     * Sort routes by number of flights (ascending - fewest flights first).
-     * Uses simple bubble sort (sufficient for small number of routes).
+     * Sort routes by length so shortest ones come first. Uses bubble sort since the list is small.
      */
     private void sortRoutesByLength(DynamicList<DynamicList<Flight>> routes) {
-        // Bubble sort - O(n^2) but routes list is typically small
+        // Bubble sort - simple and fine for small lists
         for (int i = 0; i < routes.size() - 1; i++) {
             for (int j = 0; j < routes.size() - i - 1; j++) {
                 if (routes.get(j).size() > routes.get(j + 1).size()) {
@@ -169,8 +168,7 @@ public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, St
     }
     
     /**
-     * Internal class for BFS search node.
-     * Stores current airport, path taken so far, and number of flights used.
+     * Helper class for BFS. Tracks the current airport, the path taken, and how many flights we've used.
      */
     private static class SearchNode {
         String airportCode;
