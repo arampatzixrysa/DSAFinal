@@ -50,7 +50,7 @@ public class RouteNetwork implements RouteNetworkInterface {
     }
     
     @Override
-public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, String endCode, int maxStops) {
+    public DynamicList<DynamicList<Flight>> findRoutesWithStops(String startCode, String endCode, int maxStops) {
     if (!airports.containsKey(startCode) || !airports.containsKey(endCode)) {
         return new DynamicList<>();
     }

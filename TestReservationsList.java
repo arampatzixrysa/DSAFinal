@@ -1,3 +1,8 @@
+/**
+ * Development test for ReservationsList ADT functionality.
+ * Tests dynamic pricing, cancellations, and route finding.
+ * kept for reference.
+ */
 public class TestReservationsList {
     public static void main(String[] args) {
         System.out.println("=== TESTING RESERVATIONSLIST ADT ===\n");
@@ -15,7 +20,7 @@ public class TestReservationsList {
         
         ReservationsList reservations = new ReservationsList(network);
         
-        System.out.println("✅ Network setup complete\n");
+        System.out.println(" Network setup complete\n");
         
         // Test 1: Book a direct flight (should pick cheapest initially)
         System.out.println("--- Test 1: First Booking (ATH → JFK, 10 seats) ---");
@@ -75,6 +80,6 @@ public class TestReservationsList {
         System.out.println("Total reservations: " + reservations.getTotalReservations());
         System.out.println("(Expected: 2, since one was cancelled)\n");
         
-        System.out.println("=== ✅ RESERVATIONSLIST ADT TESTS PASSED ===");
+        System.out.println("===  RESERVATIONSLIST ADT TESTS PASSED ===");
     }
 }

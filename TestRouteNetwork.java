@@ -1,4 +1,9 @@
-public class TestRouteNework {
+/**
+ * Development test for RouteNetwork ADT functionality.
+ * Tests airport management, flight routing, and path finding with BFS.
+ * kept for reference.
+ */
+public class TestRouteNetwork {
     public static void main(String[] args) {
         System.out.println("=== TESTING ROUTENETWORK ADT ===\n");
         
@@ -10,7 +15,7 @@ public class TestRouteNework {
         network.addAirport("LHR", "Heathrow", "London");
         network.addAirport("CDG", "Charles de Gaulle", "Paris");
         
-        System.out.println("✅ Added 4 airports");
+        System.out.println("Added 4 airports");
         
         // Add flights (create a simple network)
         // ATH → LHR (direct)
@@ -23,7 +28,7 @@ public class TestRouteNework {
         network.addFlight("AF007", "CDG", "JFK", 200, 380.0);
         network.addFlight("A3600", "ATH", "JFK", 180, 500.0); // Direct option
         
-        System.out.println("✅ Added 5 flights");
+        System.out.println("Added 5 flights");
         System.out.println("Total flights: " + network.getAllFlights().size());
         
         // Test direct flight lookup
@@ -65,7 +70,7 @@ public class TestRouteNework {
         DynamicList<DynamicList<Flight>> noRoute = network.findRoutesWithStops("JFK", "ATH", 1);
         System.out.println("Found " + noRoute.size() + " routes (expected 0)");
         
-        System.out.println("\n=== ✅ ROUTENETWORK ADT TESTS PASSED ===");
+        System.out.println("\n===ROUTENETWORK ADT TESTS PASSED ===");
     }
 }
 

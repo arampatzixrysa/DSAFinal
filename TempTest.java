@@ -1,3 +1,8 @@
+/**
+ * Quick development test for individual data classes.
+ * Used during development to verify Airport, Flight, and Reservation work correctly.
+ * kept for reference.
+ */
 public class TempTest {
     public static void main(String[] args) {
         // Test Airport
@@ -22,6 +27,6 @@ public class TempTest {
         Reservation r1 = new Reservation("RES001", f1, "John Doe", 2, 500.0);
         System.out.println(r1);
         
-        System.out.println("\n✅ All data classes working correctly!");
+        System.out.println("\nAll data classes working correctly!");
     }
 }
